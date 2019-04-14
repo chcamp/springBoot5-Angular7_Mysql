@@ -5,7 +5,7 @@ import { ClienteService } from './cliente.service';
 import swal from 'sweetalert2';
 
 //Prueba gitHub
-//cambiaaa!!
+//Prueba de cambios
 
 @Component({
   selector: 'app-clientes',
