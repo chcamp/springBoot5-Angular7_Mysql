@@ -1,6 +1,6 @@
 package com.chris.controller;
 
-import java.util.Date;
+import java.util.Date;		
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +24,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.chris.models.entity.Cliente;
 import com.chris.models.service.ClienteServiceImpl;
 import com.chris.models.service.IClienteService;
+
+/*
+ * Esta es una prueba de Pull en GITHUB 14 Abril  2019
+ * 
+ * */
 
 @CrossOrigin(origins = {"http://localhost:4200"})
 @RestController
