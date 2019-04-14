@@ -4,11 +4,13 @@ import { ClienteService } from './cliente.service';
 
 import swal from 'sweetalert2';
 
+//Prueba gitHub
+//cambiaaa!!
 
 @Component({
   selector: 'app-clientes',
-  templateUrl: './clientes.component.html',
-  styleUrls: ['./clientes.component.css']
+  templateUrl: './clientes.component.html'
+  
 })
 export class ClientesComponent implements OnInit {  
 
