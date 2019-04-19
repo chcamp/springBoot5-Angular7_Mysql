@@ -35,6 +35,13 @@ export class ClienteService {
 
     return this.http.post<Cliente>(this.urlEndpoint, cliente, {headers: this.httpHeaders}).pipe(
         catchError(e => {
+          //si el estatos de error desde el backend es 400 BAD REQUEST
+          if(e.status==400){
+            //retornamos el error para que el componente se encarge
+            //de manejar este error
+            return throwError(e);
+          }
+
           console.error(e.error.mensaje);
           Swal.fire(e.error.mensaje, e.error.error, 'error');
           //para que este tipo de error e se castee a un Observable usamos el throwError(e);
@@ -60,11 +67,19 @@ export class ClienteService {
     );
   }
 
-  //Actualizar cliente
+  // Actualizar cliente
   update(cliente: Cliente): Observable<any>{
 
     return this.http.put<any>(`${this.urlEndpoint}/${cliente.id}`, cliente, {headers: this.httpHeaders}).pipe(
       catchError(e => {
+
+         // si el estatos de error desde el backend es 400 BAD REQUEST
+          if(e.status==400){
+            //retornamos el error para que el componente se encarge
+            //de manejar este error
+            return throwError(e);
+          }
+
         console.error(e.error.mensaje);
         Swal.fire(e.error.mensaje, e.error.error, 'error');
         //para que este tipo de error e se castee a un Observable usamos el throwError(e);
