@@ -1,6 +1,6 @@
 package com.chris.models.entity;
 
-import java.io.Serializable;
+import java.io.Serializable;	
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,6 +12,9 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="cliente")
@@ -23,10 +26,17 @@ public class Cliente implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	@Column(name="nombre", nullable=false)
+	@NotEmpty(message = "No puede estar vacío.")
+	@Size(min = 4, max = 12, message = "El tamaño tiene que estar entre 4 y 12.")
 	private String nombre;
+	
 	@Column(name="apellido")
+	@NotEmpty(message = "No puede estar vacío.")
 	private String apellido;
+	
 	@Column(name="email",nullable=false, unique=true)
+	@NotEmpty(message = "No puede estar vacío.")
+	@Email(message = "No es una dirección de correo bien formada.")
 	private String email;
 	@Column(name="create_at")
 	@Temporal(TemporalType.DATE)
