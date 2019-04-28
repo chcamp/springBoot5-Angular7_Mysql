@@ -30,14 +30,14 @@
           <tr *ngFor="let cliente of clientes ">
               <td>{{cliente.id}}</td>
               <td>{{cliente.nombre}}</td>
-              <td>{{cliente.apellido}}</td>
-              <td>{{cliente.createAt}}</td>
+              <td>{{cliente.apellido | uppercase }}</td>
+              <td>{{cliente.createAt | date: "EEEE dd, MMMM yyyy" }}</td>
               <td>{{cliente.email}}</td>
               <td>
                 <button type="button" name="editar" [routerLink]="['/clientes/form', cliente.id]"
                     class="btn btn-primary">Editar</button>
               </td>
-
+            
               <td>
                 <button type="button" name="eliminar" (click) = 'delete(cliente)'
                     class="btn btn-danger">Eliminar</button>

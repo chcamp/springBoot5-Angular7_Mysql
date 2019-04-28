@@ -1,15 +1,23 @@
 import { Injectable } from '@angular/core';
+import { formatDate, DatePipe } from '@angular/common';
 import { CLIENTES } from './clientes.json';
 import { Cliente } from './cliente';
+
+
 
 import { Observable, of, throwError } from 'rxjs';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, tap } from 'rxjs/operators';
+
 import Swal from 'sweetalert2';
 
 import { Router } from '@angular/router';
+
+
+
+
 
 @Injectable( {
     providedIn: 'root'
@@ -23,16 +31,62 @@ export class ClienteService {
     constructor( private http: HttpClient, private router: Router ) { }
 
     /*
-      
+
       getClientes(): Observable<Cliente[]> {
-    
+
         return this.http.get<Cliente[]>(this.urlEndpoint);
         // return of(CLIENTES);
       }
       */
 
+    getClientes( page: number ): Observable<any> {
+        return this.http.get( this.urlEndpoint + '/page/' + page ).pipe(
+            //response: any porque la rpta puede ser
+            //cualquier tipo de dato un JSON
+            tap(( response: any ) => {
+                console.log( 'ClienteService: tap1' );
 
-    //Este metodo create retorna un tipo Observable cliente
+                ( response.content as Cliente[] ).forEach( cliente => {
+                    //Y aca podemos moostrar para el log los datos
+                    //de todos los clientes
+
+                    console.log( cliente.nombre );
+                }
+
+                )
+            } ),
+
+            map(( response: any ) => {
+
+                //el map tambien se puede usar para modificar sus valores
+                //internos cada item de este array.
+                ( response.content as Cliente[] ).map( cliente => {
+                    cliente.nombre = cliente.nombre.toUpperCase();
+                    let datePipe = new DatePipe( 'es' );
+
+                    //cliente.createAt = datePipe.transform( cliente.createAt, 'EEEE dd, MMMM, yyyy' );
+
+                    //formatDate( cliente.createAt, 'dd-MM-yyyy', 'en-US' );
+                    return cliente;
+                } );
+                return response;
+
+            } ),
+
+            tap( response => {
+                console.log( 'ClienteService: tap2' );
+                ( response.content as Cliente[] ).forEach( cliente => {
+                    //Y aca podemos moostrar para el log los datos
+                    //de todos los clientes
+
+                    console.log( cliente.nombre );
+                }
+
+                )
+            } )
+        );
+    }
+
     //que se creo en el API REST
     create( cliente: Cliente ): Observable<any> {
 
@@ -106,8 +160,3 @@ export class ClienteService {
     }
 
 }
-
-
-
-
-
