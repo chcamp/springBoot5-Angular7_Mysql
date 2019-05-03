@@ -18,6 +18,9 @@ import swal from 'sweetalert2';
 } )
 export class ClientesComponent implements OnInit {
 
+
+    paginador: any;
+
     clientes: Cliente[];
     constructor( private clienteService: ClienteService, private activatedRoute: ActivatedRoute ) { }
 
@@ -62,7 +65,12 @@ export class ClientesComponent implements OnInit {
                 //clientes => es una variable que se le asigna el this.clientes = clientes
                 //osea lo guarda en clientes lo vas guardando en this.clientes pero con los cambios aa
 
-                response => this.clientes = response.content as Cliente[] );
+                response => {
+                    this.clientes = response.content as Cliente[];
+
+                    this.paginador = response;
+
+                } );
         }
 
         )//cierre de paramMap

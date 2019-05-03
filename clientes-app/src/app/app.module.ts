@@ -28,6 +28,8 @@ import { registerLocaleData } from '@angular/common';
 //importar locales
 import localeEs from '@angular/common/locales/es';
 
+import { PaginatorComponent } from './paginator/paginator.component';
+
 //registrar los locales con el nombre que quieras utilizar a la hora de proveer
 registerLocaleData( localeEs, 'es' );
 
@@ -55,7 +57,8 @@ const routes: Routes = [
         FooterComponent,
         DirectivaComponent,
         ClientesComponent,
-        FormComponent
+        FormComponent,
+        PaginatorComponent
     ],
     imports: [
         BrowserModule,
