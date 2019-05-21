@@ -65,20 +65,32 @@
              </div>                       
             </div>
         </div>
-
+        
+        <!-- Campo fecha -->
         <div class="form-group row">
-            <div class="col-sm-6">
-               <button class="btn btn-primary" role="button" (click)='create()'
-                        *ngIf="!cliente.id else elseBlock" [disabled]="!clienteForm.form.valid">Crear</button>
+          <label for="createAt" class="col-form-label col-sm-2">Fecha</label>
+          <div class="col-sm-6">
+            <input type="date" class="form-control" [(ngModel)]="cliente.createAt" name="createAt"> <!--required -->
 
-              <ng-template #elseBlock>
-                <button class="btn btn-primary" role="button" (click)='update()' [disabled]="!clienteForm.form.valid">
-                  Editar
-                </button>
-              </ng-template>
-                              
-            </div>
+                                           
+          </div> 
+      </div>
+      <!--Fin campo fecha-->
+      <!--Boton crear cliente-->
+
+      <div class="form-group row">
+        <div class="col-sm-6">
+           <button class="btn btn-primary" role="button" (click)='create()'
+                    *ngIf="!cliente.id else elseBlock" [disabled]="!clienteForm.form.valid">Crear</button>
+
+          <ng-template #elseBlock>
+            <button class="btn btn-primary" role="button" (click)='update()' [disabled]="!clienteForm.form.valid">
+              Editar
+            </button>
+          </ng-template>
+                          
         </div>
+    </div>
 
     </form>
 
